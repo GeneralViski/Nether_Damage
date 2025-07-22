@@ -1,0 +1,17 @@
+name: Nether_Damage
+version: '1.1.1'
+main: me.general_viski.nether_damage
+api-version: '1.21'
+authors: [ General_Viski ]
+commands:
+  netherdamage_reload:
+    description: Перезагрузить конфиг Nether_Damage
+    usage: /<command>
+    permission: netherdamage.reload
+permissions:
+  netherdamage.reload:
+    description: Позволяет перезагружать конфиг Nether_Damage
+    default: op
+  netherdamage.bypass:
+    description: Позволяет не получать урон над бедроком в Нижнем мире
+    default: false

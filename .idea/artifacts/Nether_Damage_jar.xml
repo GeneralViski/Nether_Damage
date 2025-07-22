@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Nether_Damage:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Nether_Damage_jar</output-path>
+    <root id="archive" name="Nether_Damage.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Nether_Damage" />
+    </root>
+  </artifact>
+</component>
