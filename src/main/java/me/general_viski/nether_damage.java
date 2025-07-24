@@ -35,6 +35,7 @@ public final class nether_damage extends JavaPlugin {
         private final nether_damage plugin;
         private final int maxY;
         private final double damage;
+        private final String hotMessage;
         private final Set<Player> netherPlayers = new HashSet<>();
 
         public NetherDamageListener(nether_damage plugin) {
@@ -42,6 +43,7 @@ public final class nether_damage extends JavaPlugin {
             FileConfiguration config = plugin.getConfig();
             this.maxY = config.getInt("maxY", 127);
             this.damage = config.getDouble("damage", 2.0);
+            this.hotMessage = config.getString("hotMessage", "§cЗдесь очень горячо!");
         }
 
         @EventHandler
@@ -68,7 +70,7 @@ public final class nether_damage extends JavaPlugin {
                             if (player.hasPermission("netherdamage.bypass")) return;
                             player.setFireTicks(60); // поджог на 3 секунды
                             player.damage(damage); // наносит урон из конфига
-                            player.sendMessage("§cЗдесь очень горячо!" );
+                            player.sendMessage(hotMessage);
                         }
                     }
                 }.runTaskLater(plugin, 1L);
