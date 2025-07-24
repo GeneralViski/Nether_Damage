@@ -8,9 +8,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public final class nether_damage extends JavaPlugin {
 
@@ -31,6 +35,7 @@ public final class nether_damage extends JavaPlugin {
         private final nether_damage plugin;
         private final int maxY;
         private final double damage;
+        private final Set<Player> netherPlayers = new HashSet<>();
 
         public NetherDamageListener(nether_damage plugin) {
             this.plugin = plugin;
@@ -40,8 +45,19 @@ public final class nether_damage extends JavaPlugin {
         }
 
         @EventHandler
+        public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
+            Player player = event.getPlayer();
+            if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
+                netherPlayers.add(player);
+            } else {
+                netherPlayers.remove(player);
+            }
+        }
+
+        @EventHandler
         public void onPlayerMove(PlayerMoveEvent event) {
             Player player = event.getPlayer();
+            if (!netherPlayers.contains(player)) return;
             World world = player.getWorld();
             if (world.getEnvironment() == World.Environment.NETHER && player.getLocation().getY() > maxY) {
                 if (player.hasPermission("netherdamage.bypass")) return;
