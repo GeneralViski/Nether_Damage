@@ -50,7 +50,9 @@ public final class nether_damage extends JavaPlugin {
                     public void run() {
                         if (player.getWorld().getEnvironment() == World.Environment.NETHER && player.getLocation().getY() > maxY) {
                             if (player.hasPermission("netherdamage.bypass")) return;
+                            player.setFireTicks(60); // поджог на 3 секунды
                             player.damage(damage); // наносит урон из конфига
+                            player.sendMessage("§cЗдесь очень горячо!" );
                         }
                     }
                 }.runTaskLater(plugin, 1L);
